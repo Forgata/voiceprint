@@ -1,4 +1,3 @@
-// goal setup pvrecorder and pipe
 import { PvRecorder } from "@picovoice/pvrecorder-node";
 import { processFrame } from "./frameProcessor.js";
 import { saveID } from "../pipeline/idStorage.js";
@@ -30,7 +29,6 @@ export async function pvRecord() {
         console.log("Voiceprint calculated and saved.");
       } else {
         const stored = loadStoredVoicePrint();
-        // Ensure you pass stored.voiceprint (the array)
         const score = cosineSimilarity(resultPrint, stored.voiceprint);
 
         console.log(`\nSimilarity Score: ${(score * 100).toFixed(2)}%`);
