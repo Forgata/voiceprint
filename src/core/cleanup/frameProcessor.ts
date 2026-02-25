@@ -6,12 +6,9 @@ import { calculateVoiceprint } from "../pipeline/voiceprint.js";
 import { normaliseInt16 } from "./normaliseInt16.js";
 import { cobraVAD } from "./vad.js";
 import { applyWindow } from "./window.js";
-import { checkFile } from "../utils/checkFile.js";
 
 export const speechBuffer: Float32Array[] = [];
 const MAX_SPEECH_FRAMES = 150;
-
-const printExists = checkFile(path.join(process.cwd(), "voiceprint.json"));
 
 export async function processFrame(frame: Int16Array) {
   const peak = Math.max(...frame.map(Math.abs));
