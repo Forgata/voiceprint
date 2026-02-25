@@ -1,5 +1,12 @@
 import fs from "node:fs";
 
+export interface VoicePrint {
+  label: string;
+  voiceprint: number[];
+  capturedAt: string;
+  version: string;
+}
+
 export function saveID(
   voiceprint: number[],
   filename: string = "voiceprint.json",
