@@ -1,5 +1,7 @@
 import { Cobra } from "@picovoice/cobra-node";
-const key = "6gK6/WtYaspW1rwbjMMVw2O4j0UDQPNU3Vp8m9YIddzTS40BlMxymw==";
+import "dotenv/config";
+const key = process.env.COBRA_KEY;
+if (!key) throw new Error("COBRA_KEY not found in .env");
 const cobra = new Cobra(key);
 
 export async function cobraVAD(frame: Int16Array) {
