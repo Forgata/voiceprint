@@ -12,7 +12,7 @@ const MAX_SPEECH_FRAMES = 150;
 
 export async function processFrame(frame: Int16Array) {
   const peak = Math.max(...frame.map(Math.abs));
-  if (peak > 1000) {
+  if (peak > 900) {
     const normalisedFrame = normaliseInt16(frame);
 
     const probability = await cobraVAD(normalisedFrame);
