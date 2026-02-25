@@ -17,29 +17,23 @@ export async function processFrame(frame: Int16Array) {
 
     const probability = await cobraVAD(normalisedFrame);
 
-    if (probability > 0.75) {
-      console.log(
-        "Voice activity detected with probability:",
-        probability.toFixed(5),
-      );
+    if (probability > 0.65) {
+      console.log("Voice activity detected...");
 
       if (speechBuffer.length >= MAX_SPEECH_FRAMES)
-        console.log("Cleanup complete");
+        console.log("Recording completed");
 
       const frameWindow = applyWindow(normalisedFrame);
 
       const features = extractMFCC(frameWindow);
       const fullMatrix = collectMFCC(features);
 
-      if (fullMatrix) {
-        const print = calculateVoiceprint(fullMatrix);
-        saveID(print);
-        console.log("Voiceprint calculated and saved.");
-      }
+      if (fullMatrix) return calculateVoiceprint(fullMatrix);
 
-      console.log("Windowed sample [0]:", frameWindow[0]);
+      // console.log("Windowed sample [0]:", frameWindow[0]);
 
       speechBuffer.push(frameWindow);
     }
   }
+  return null;
 }
