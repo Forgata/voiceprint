@@ -16,7 +16,9 @@
   "type": "module",
   "main": "src/main.ts",
   "scripts": {
-    "dev": "nodemon"
+    "build": "tsc",
+    "enroll": "npm run build && nodemon -- enroll",
+    "verify": "npm run build && nodemon -- verify"
   },
   "devDependencies": {
     "@types/node": "^25.3.0",
