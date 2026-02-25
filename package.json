@@ -29,6 +29,7 @@
   "dependencies": {
     "@picovoice/cobra-node": "^3.0.2",
     "@picovoice/pvrecorder-node": "^1.2.8",
+    "dotenv": "^17.3.1",
     "meyda": "^5.6.3",
     "wav": "^1.0.2"
   }
