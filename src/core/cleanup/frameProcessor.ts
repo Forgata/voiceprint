@@ -16,15 +16,11 @@ export async function processFrame(frame: Int16Array) {
     const probability = await cobraVAD(normalisedFrame);
 
     if (probability > 0.7) {
-      // console.log("Voice activity detected...");
       process.stdout.write(
         `\rVoice activity detected... (${speechBuffer.length}/${MAX_SPEECH_FRAMES})`,
       );
 
       if (speechBuffer.length === MAX_SPEECH_FRAMES) {
-        // process.stdout.write("\n");
-        // process.stdout.write("\n");
-        // console.log("Recording completed");
         console.clear();
       }
       const frameWindow = applyWindow(normalisedFrame);
