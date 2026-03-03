@@ -3,9 +3,11 @@ import { processFrame } from "./frameProcessor.js";
 import { saveID } from "../pipeline/idStorage.js";
 import { loadStoredVoicePrint } from "../scoring/idManager.js";
 import { cosineSimilarity } from "../scoring/similarity.js";
+import chalk from "chalk";
 
 export async function pvRecord() {
   const mode = process.argv[2] === "enroll" ? "enroll" : "verify";
+  const printFileName = process.argv[3];
 
   const devices = PvRecorder.getAvailableDevices();
   devices.forEach((device, index) => console.log(`${index}: ${device}`));
@@ -17,6 +19,11 @@ export async function pvRecord() {
   console.log(`recording started with device: ${devices[0]} | default device`);
   console.log(`--- MODE: ${mode.toUpperCase()} ---`);
 
+  if (!printFileName)
+    console.log(
+      `${chalk.yellowBright("No print file name was provided as an argument.")}\n${chalk.blueBright("Voiceprint will default to voiceprint.print.json")}`,
+    );
+
   try {
     while (recorder.isRecording) {
       const frame = await recorder.read();
@@ -25,8 +32,7 @@ export async function pvRecord() {
       if (!resultPrint) continue;
 
       if (mode === "enroll") {
-        saveID(resultPrint);
-        console.log("Voiceprint calculated and saved.");
+        saveID(resultPrint, ...(printFileName ? [printFileName] : []));
       } else {
         const stored = loadStoredVoicePrint();
         const score = cosineSimilarity(resultPrint, stored.voiceprint);
