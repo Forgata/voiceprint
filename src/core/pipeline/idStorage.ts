@@ -7,17 +7,15 @@ export interface VoicePrint {
   version: string;
 }
 
-export function saveID(
-  voiceprint: number[],
-  filename: string = "voiceprint.json",
-) {
+export function saveID(voiceprint: number[], filename: string = "voiceprint") {
   const data = {
-    label: "Divine",
+    label: filename,
     voiceprint,
     capturedAt: new Date().toISOString(),
     version: "1.0.0",
   };
+  // console.clear();
 
-  fs.writeFileSync(filename, JSON.stringify(data, null, 2));
-  console.log(`Voiceprint saved to ${filename}`);
+  fs.writeFileSync(`${filename}.print.json`, JSON.stringify(data, null, 2));
+  console.log(`Voiceprint saved to ${filename}.print.json`);
 }
