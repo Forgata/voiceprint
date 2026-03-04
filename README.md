@@ -69,17 +69,17 @@ The system uses a command-line argument to switch between Enrollment and Verific
 Record your "Standard" voice signature. Speak clearly for about 5-8 seconds until you see a log `Voiceprint calculated and saved`
 
 ```bash
-npm run enroll
+npm run enroll <optional enrollment file name here>
 ```
 
-This will generate a `voiceprint.json` file in the root directory containing your averaged MFCC vector.
+If the file name for the enrollment wasnt provided, a `voiceprint.print.json` will be generated in the /prints. If the optional file name was provided, the saved print will have the same filename as the optional argument provided.
 
 ### Step 2: Voice Verification
 
 Test your live voice against the stored signature.
 
 ```bash
-npm run verify
+npm run verify <stored voiceprint label>
 ```
 
 The system will output your Similarity Score (e.g., 95.43%) based on the calibrated threshold.
