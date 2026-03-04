@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import path from "node:path";
 
 export interface VoicePrint {
   label: string;
@@ -7,15 +8,15 @@ export interface VoicePrint {
   version: string;
 }
 
-export function saveID(voiceprint: number[], filename: string = "voiceprint") {
+export function saveID(voiceprint: number[], fileName: string = "voiceprint") {
   const data = {
-    label: filename,
+    label: fileName,
     voiceprint,
     capturedAt: new Date().toISOString(),
     version: "1.0.0",
   };
-  // console.clear();
 
-  fs.writeFileSync(`${filename}.print.json`, JSON.stringify(data, null, 2));
-  console.log(`Voiceprint saved to ${filename}.print.json`);
+  const file = path.join(process.cwd(), "prints", `${fileName}.print.json`);
+  fs.writeFileSync(file, JSON.stringify(data, null, 2));
+  console.log(`Voiceprint saved to /voiceprint/${fileName}.print.json`);
 }
