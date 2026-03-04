@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import { collectMFCC } from "../pipeline/mfccCollector.js";
 import { extractMFCC } from "../pipeline/mfccExtractor.js";
 import { calculateVoiceprint } from "../pipeline/voiceprint.js";
@@ -20,16 +21,17 @@ export async function processFrame(frame: Int16Array) {
         `\rVoice activity detected... (${speechBuffer.length}/${MAX_SPEECH_FRAMES})`,
       );
 
-      if (speechBuffer.length === MAX_SPEECH_FRAMES) {
-        console.clear();
+      if (speechBuffer.length >= MAX_SPEECH_FRAMES - 1) {
+        process.stdout.write("\n");
+        console.log(chalk.green("recording completed"));
       }
       const frameWindow = applyWindow(normalisedFrame);
 
       const features = extractMFCC(frameWindow);
-      const fullMatrix = collectMFCC(features);
-
-      if (fullMatrix) return calculateVoiceprint(fullMatrix);
       speechBuffer.push(frameWindow);
+
+      const fullMatrix = collectMFCC(features);
+      if (fullMatrix) return calculateVoiceprint(fullMatrix);
     }
   }
   return null;
