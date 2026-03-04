@@ -26,7 +26,7 @@ export async function pvRecord() {
     console.log(
       mode === "enroll"
         ? chalk.yellow(`Enrolling voice print to ${printFileName}.print.json`)
-        : `Verifying ${printFileName}.print.json`,
+        : chalk.yellow(`Verifying ${printFileName}.print.json`),
     );
 
   try {
