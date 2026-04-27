@@ -46,7 +46,7 @@ export async function pvRecord() {
 
         console.log(`\nSimilarity Score: ${(score * 100).toFixed(3)}%`);
 
-        console.log(score > 0.85 ? "✅ ACCESS GRANTED" : "❌ ACCESS DENIED");
+        console.log(score > 0.85 ? "ACCESS GRANTED" : "ACCESS DENIED");
       }
       break;
     }
