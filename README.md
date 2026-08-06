@@ -90,3 +90,5 @@ The system will output your Similarity Score (e.g., 95.43%) based on the calibra
 | **Frame Length**          | 512 Samples (32ms)         |
 | **Target Match Accuracy** | 87% - 98% Similarity       |
 | **Imposter Rejection**    | Typically < 80% Similarity |
+
+check out [voiceprint-rs](https://github.com/Forgata/voiceprint-rs)- a rust implementation of voiceprint.
